@@ -1,0 +1,5 @@
+node_modules/
+dist/
+# Ignorar todos los archivos .zip y .rar en cualquier parte del proyecto
+**/*.zip
+**/*.rar
