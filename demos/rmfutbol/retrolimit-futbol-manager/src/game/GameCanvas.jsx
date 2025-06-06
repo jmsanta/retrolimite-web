@@ -42,7 +42,7 @@ class MainScene extends Phaser.Scene {
     const player2_4 = this.add.rectangle(410, 450, 25, 45, 0x0074d9);
 
       // Escudos y VS
-    this.add.image(696, 40, 'team1').setOrigin(0).setScale(1);
+    this.add.image(620, 40, 'team1').setOrigin(0).setScale(1);
     this.add.image(40, 40, 'team2').setOrigin(0).setScale(1);
     this.add.image(368, 40, 'vs').setOrigin(0).setScale(0.75);
   
