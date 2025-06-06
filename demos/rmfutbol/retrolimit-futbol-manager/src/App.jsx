@@ -3,6 +3,9 @@ import { GameCanvas } from './game/GameCanvas';
 import Fichajes from './game/components/fichajes';
 import Alineacion from './game/components/alineacion';
 
+import BackgroundMusic from './game/components/music';
+import Configuracion from './game/components/configuracion';
+
 export default function App() {
   const [view, setView] = useState('menu');
 
@@ -17,7 +20,7 @@ export default function App() {
       case 'alineacion':
         return <Alineacion />;  
       case 'config':
-        return <div><h2>⚙️ Configuración</h2><p>Opciones del juego.</p></div>;
+        return <Configuracion/>;
       default:
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -48,6 +51,7 @@ export default function App() {
       {view !== 'menu' && (
         <button style={{ marginTop: '2rem' }} onClick={() => setView('menu')}>🔙 Volver al menú</button>
       )}
+        <BackgroundMusic />
     </div>
   );
 }
