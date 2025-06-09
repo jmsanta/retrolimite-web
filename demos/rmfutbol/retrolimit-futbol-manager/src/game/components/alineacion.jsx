@@ -11,7 +11,6 @@ export default function Alineacion() {
       backgroundColor: '#1a1a1a',
       boxShadow: '0 0 20px #000',
       fontFamily: 'Arial, sans-serif',
-      overflow: 'hidden'
     }}>
       <div style={{
         backgroundColor: '#000',

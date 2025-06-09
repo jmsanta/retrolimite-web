@@ -11,7 +11,6 @@ export default function Fichajes() {
       backgroundColor: '#1a1a1a',
       boxShadow: '0 0 20px #000',
       fontFamily: 'Arial, sans-serif',
-      overflow: 'hidden'
     }}>
       <div style={{
         backgroundColor: '#000',
@@ -24,18 +23,22 @@ export default function Fichajes() {
       }}>
         Retrolimit Fútbol Manager
       </div>
-      <div style={{ backgroundColor: '#222', padding: 20, textAlign: 'center' }}>
-        <img
-          src="/fichajes.bmp"
-          alt="Pantalla Fichajes"
-          style={{
-            maxWidth: '100%',
-            height: 'auto',
-            border: '2px solid #fff',
-            borderRadius: 8
-          }}
-        />
-      </div>
+        <div style={{
+          textAlign: 'center',
+          marginTop: 20
+        }}>
+          <img 
+            src="/fichajes.bmp"
+            alt="Pantalla Fichajes"
+            style={{
+              width: '100%',
+              maxWidth: '800px',
+              height: 'auto',
+              border: '2px solid white',
+              borderRadius: '10px'
+            }}
+          />
+        </div>
     </div>
   );
 }

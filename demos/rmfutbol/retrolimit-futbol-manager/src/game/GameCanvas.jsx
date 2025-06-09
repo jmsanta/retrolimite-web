@@ -6,47 +6,55 @@ class MainScene extends Phaser.Scene {
     super({ key: 'MainScene' });
   }
 
-
   preload() {
-    this.load.image('team1', 'team1.png');
-    this.load.image('team2', 'team2.png');
-    this.load.image('vs', 'vs.png');
+    this.load.image('team1', '/team1.png');
+    this.load.image('team2', '/team2.png');
+    this.load.image('vs', '/vs.png');
   }
 
   create() {
-    console.log('✅ create ejecutado');
-    this.cameras.main.setBackgroundColor('#0a3d62');
+    this.cameras.main.setBackgroundColor('#000');
+
+    const width = 800;
+    const height = 600;
+
+    // Fondo verde césped
+    this.add.rectangle(width / 2, height / 2, width, height, 0x006600);
 
     const graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xffffff } });
 
-    // Campo
-    graphics.strokeRect(20, 20, 760, 560);
-    graphics.strokeLineShape(new Phaser.Geom.Line(400, 20, 400, 580));
-    graphics.strokeCircle(400, 300, 60);
+    // Líneas del campo
+    graphics.strokeRect(0, 0, width, height); // borde
+    graphics.strokeLineShape(new Phaser.Geom.Line(width / 2, 0, width / 2, height)); // línea central
 
-    // Áreas
-    graphics.strokeRect(20, 220, 60, 160);
-    graphics.strokeRect(20, 260, 20, 80);
-    graphics.strokeRect(720, 220, 60, 160);
-    graphics.strokeRect(760, 260, 20, 80);
+    // Círculo central
+    graphics.strokeCircle(width / 2, height / 2, 40);
 
-    const field = this.add.rectangle(400, 300, 760, 560, 0x1e8449);
+    // Porterías
+    graphics.strokeRect(0, height / 2 - 40, 10, 80); // izquierda
+    graphics.strokeRect(width - 10, height / 2 - 40, 10, 80); // derecha
+
+    // Jugadores
+    const players = [
+      this.add.rectangle(300, 300, 20, 50, 0xff4136),
+      this.add.rectangle(250, 200, 20, 45, 0xff4136),
+      this.add.rectangle(200, 100, 20, 45, 0xff4136),
+      this.add.rectangle(150, 430, 25, 45, 0xff4136),
+      this.add.rectangle(500, 300, 20, 50, 0x0074d9),
+      this.add.rectangle(600, 350, 25, 50, 0x0074d9),
+      this.add.rectangle(400, 150, 25, 45, 0x0074d9),
+      this.add.rectangle(410, 450, 25, 45, 0x0074d9),
+    ];
+
+    // Balón
     const ball = this.add.circle(400, 300, 10, 0xffffff);
-    const player1 = this.add.rectangle(300, 300, 20, 50, 0xff4136);
-    const player1_2 = this.add.rectangle(250, 200, 20, 45, 0xff4136);
-    const player1_3 = this.add.rectangle(200, 100, 20, 45, 0xff4136);
-    const player1_4 = this.add.rectangle(150, 430, 25, 45, 0xff4136);
-    const player2 = this.add.rectangle(500, 300, 20, 50, 0x0074d9);
-    const player2_2 = this.add.rectangle(600, 350, 25, 50, 0x0074d9);
-    const player2_3 = this.add.rectangle(400, 150, 25, 45, 0x0074d9);
-    const player2_4 = this.add.rectangle(410, 450, 25, 45, 0x0074d9);
 
-      // Escudos y VS
-    this.add.image(620, 40, 'team1').setOrigin(0).setScale(1);
-    this.add.image(40, 40, 'team2').setOrigin(0).setScale(1);
+    // Escudos y "VS"
+    this.add.image(40, 40, 'team1').setOrigin(0).setScale(0.5);
+    this.add.image(700, 40, 'team2').setOrigin(0).setScale(0.5);
     this.add.image(368, 40, 'vs').setOrigin(0).setScale(0.75);
-  
 
+    // Animaciones
     this.tweens.add({
       targets: ball,
       x: 300,
@@ -57,67 +65,17 @@ class MainScene extends Phaser.Scene {
       ease: 'Sine.easeInOut'
     });
 
-
-     this.tweens.add({
-      targets: player1_4,
-      x: 300,
-      y: 400,
-      duration: 6500,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
+    players.forEach((player, index) => {
+      this.tweens.add({
+        targets: player,
+        x: 300 + Math.sin(index) * 100,
+        y: 300 + Math.cos(index) * 100,
+        duration: 2000 + index * 400,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
     });
-
-    this.tweens.add({
-      targets: player1_2,
-      x: 300,
-      y: 400,
-      duration: 6500,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
-    });
-
-    this.tweens.add({
-      targets: player1_3,
-      x: 400,
-      y: 300,
-      duration: 5500,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
-    });
-
-     this.tweens.add({
-      targets: player2_4,
-      x: 300,
-      y: 400,
-      duration: 2500,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
-    });
-
-    this.tweens.add({
-      targets: player2,
-      x: 400,
-      y: 300,
-      duration: 2500,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
-    });
-
-    this.tweens.add({
-      targets: player2_3,
-      x: 200,
-      y: 400,
-      duration: 2500,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
-    });
-
   }
 }
 
@@ -126,24 +84,21 @@ export function GameCanvas() {
   const gameRef = useRef(null);
 
   useEffect(() => {
-    console.log('🟡 Montando GameCanvas...');
-
-    if (gameRef.current || !containerRef.current) {
-      console.log('⚠️ Game ya inicializado o ref vacío');
-      return;
-    }
+    if (gameRef.current || !containerRef.current) return;
 
     gameRef.current = new Phaser.Game({
       type: Phaser.AUTO,
       width: 800,
       height: 600,
-      backgroundColor: '#000000',
       parent: containerRef.current,
-      scene: [MainScene]
+      scene: [MainScene],
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+      }
     });
 
     return () => {
-      console.log('🔴 Desmontando GameCanvas');
       if (gameRef.current) {
         gameRef.current.destroy(true);
         gameRef.current = null;
@@ -155,13 +110,14 @@ export function GameCanvas() {
     <div
       ref={containerRef}
       style={{
-        margin: '0 auto',
-        maxWidth: 800,
         width: '100%',
-        height: 600,
+        maxWidth: '100%',
+        aspectRatio: '4 / 3',
+        margin: '0 auto',
         border: '2px solid #fff',
-        backgroundColor: '#001f3f'
+        overflow: 'hidden',
+        backgroundColor: '#000'
       }}
-    ></div>
+    />
   );
 }
