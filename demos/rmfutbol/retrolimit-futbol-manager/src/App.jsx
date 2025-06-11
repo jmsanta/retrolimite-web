@@ -5,6 +5,7 @@ import Alineacion from './game/components/alineacion';
 
 import BackgroundMusic from './game/components/music';
 import Configuracion from './game/components/configuracion';
+import Plantilla from './game/components/plantilla';
 
 export default function App() {
   const [view, setView] = useState('menu');
@@ -14,7 +15,7 @@ export default function App() {
       case 'partido':
         return <GameCanvas />;
       case 'plantilla':
-        return <div><h2>📋 Plantilla</h2><p>Aquí irá la plantilla del equipo.</p></div>;
+        return <Plantilla/>
       case 'fichajes':
         return <Fichajes />;
       case 'alineacion':
